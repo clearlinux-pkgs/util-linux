@@ -19,3 +19,4 @@ python-$PYTHON_VERSION
 32libcryptsetup
 32libeconf
 libeconf
+32libpcre2-posix

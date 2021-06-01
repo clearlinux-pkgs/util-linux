@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : util-linux
-Version  : 2.36.2
-Release  : 163
-URL      : https://www.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz
-Source0  : https://www.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz
+Version  : 2.37
+Release  : 164
+URL      : https://www.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.tar.xz
+Source0  : https://www.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.tar.xz
 Summary  : mount library
 Group    : Development/Tools
 License  : BSD-3-Clause BSD-4-Clause-UC GPL-2.0 GPL-3.0 ISC LGPL-2.1
@@ -17,7 +17,6 @@ Requires: util-linux-data = %{version}-%{release}
 Requires: util-linux-lib = %{version}-%{release}
 Requires: util-linux-license = %{version}-%{release}
 Requires: util-linux-locales = %{version}-%{release}
-Requires: util-linux-man = %{version}-%{release}
 Requires: util-linux-services = %{version}-%{release}
 Requires: util-linux-setuid = %{version}-%{release}
 BuildRequires : Linux-PAM-dev
@@ -38,7 +37,7 @@ BuildRequires : ncurses-dev
 BuildRequires : ncurses-dev32
 BuildRequires : pkg-config
 BuildRequires : pkgconfig(libcryptsetup)
-BuildRequires : pkgconfig(libpcre2-8)
+BuildRequires : pkgconfig(libpcre2-posix)
 BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(tinfow)
 BuildRequires : procps-ng
@@ -112,7 +111,6 @@ dev32 components for the util-linux package.
 %package doc
 Summary: doc components for the util-linux package.
 Group: Documentation
-Requires: util-linux-man = %{version}-%{release}
 
 %description doc
 doc components for the util-linux package.
@@ -162,14 +160,6 @@ Group: Default
 locales components for the util-linux package.
 
 
-%package man
-Summary: man components for the util-linux package.
-Group: Default
-
-%description man
-man components for the util-linux package.
-
-
 %package services
 Summary: services components for the util-linux package.
 Group: Systemd services
@@ -205,13 +195,13 @@ staticdev32 components for the util-linux package.
 
 
 %prep
-%setup -q -n util-linux-2.36.2
-cd %{_builddir}/util-linux-2.36.2
+%setup -q -n util-linux-2.37
+cd %{_builddir}/util-linux-2.37
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 pushd ..
-cp -a util-linux-2.36.2 build32
+cp -a util-linux-2.37 build32
 popd
 
 %build
@@ -219,7 +209,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1613151864
+export SOURCE_DATE_EPOCH=1622566134
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -273,20 +263,20 @@ cd ../build32;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1613151864
+export SOURCE_DATE_EPOCH=1622566134
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/util-linux
-cp %{_builddir}/util-linux-2.36.2/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/util-linux-2.36.2/Documentation/licenses/COPYING.BSD-3-Clause %{buildroot}/usr/share/package-licenses/util-linux/e5c9f3867b9251dcd2d97a4d1dffaa38afe6625d
-cp %{_builddir}/util-linux-2.36.2/Documentation/licenses/COPYING.BSD-4-Clause-UC %{buildroot}/usr/share/package-licenses/util-linux/8afe522e7c956a6c19914cd5ffea17a0aa2e4bc7
-cp %{_builddir}/util-linux-2.36.2/Documentation/licenses/COPYING.GPL-2.0-or-later %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/util-linux-2.36.2/Documentation/licenses/COPYING.GPL-3.0-or-later %{buildroot}/usr/share/package-licenses/util-linux/31a3d460bb3c7d98845187c716a30db81c44b615
-cp %{_builddir}/util-linux-2.36.2/Documentation/licenses/COPYING.ISC %{buildroot}/usr/share/package-licenses/util-linux/fca052e126f39e97d69d000644b7a462f215c125
-cp %{_builddir}/util-linux-2.36.2/Documentation/licenses/COPYING.LGPL-2.1-or-later %{buildroot}/usr/share/package-licenses/util-linux/01a6b4bf79aca9b556822601186afab86e8c4fbf
-cp %{_builddir}/util-linux-2.36.2/libblkid/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
-cp %{_builddir}/util-linux-2.36.2/libfdisk/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
-cp %{_builddir}/util-linux-2.36.2/libmount/COPYING %{buildroot}/usr/share/package-licenses/util-linux/66319e97eda8747087e9c5292f31c8bc5153c3c8
-cp %{_builddir}/util-linux-2.36.2/libsmartcols/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
+cp %{_builddir}/util-linux-2.37/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/util-linux-2.37/Documentation/licenses/COPYING.BSD-3-Clause %{buildroot}/usr/share/package-licenses/util-linux/e5c9f3867b9251dcd2d97a4d1dffaa38afe6625d
+cp %{_builddir}/util-linux-2.37/Documentation/licenses/COPYING.BSD-4-Clause-UC %{buildroot}/usr/share/package-licenses/util-linux/8afe522e7c956a6c19914cd5ffea17a0aa2e4bc7
+cp %{_builddir}/util-linux-2.37/Documentation/licenses/COPYING.GPL-2.0-or-later %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/util-linux-2.37/Documentation/licenses/COPYING.GPL-3.0-or-later %{buildroot}/usr/share/package-licenses/util-linux/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/util-linux-2.37/Documentation/licenses/COPYING.ISC %{buildroot}/usr/share/package-licenses/util-linux/fca052e126f39e97d69d000644b7a462f215c125
+cp %{_builddir}/util-linux-2.37/Documentation/licenses/COPYING.LGPL-2.1-or-later %{buildroot}/usr/share/package-licenses/util-linux/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/util-linux-2.37/libblkid/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
+cp %{_builddir}/util-linux-2.37/libfdisk/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
+cp %{_builddir}/util-linux-2.37/libmount/COPYING %{buildroot}/usr/share/package-licenses/util-linux/66319e97eda8747087e9c5292f31c8bc5153c3c8
+cp %{_builddir}/util-linux-2.37/libsmartcols/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -417,6 +407,7 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 /usr/bin/swapon
 /usr/bin/switch_root
 /usr/bin/taskset
+/usr/bin/uclampset
 /usr/bin/ul
 /usr/bin/umount
 /usr/bin/uname26
@@ -437,6 +428,7 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 /usr/share/bash-completion/completions/irqtop
 /usr/share/bash-completion/completions/lsirq
 /usr/share/bash-completion/completions/scriptlive
+/usr/share/bash-completion/completions/uclampset
 
 %files dev
 %defattr(-,root,root,-)
@@ -455,19 +447,6 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 /usr/lib64/pkgconfig/mount.pc
 /usr/lib64/pkgconfig/smartcols.pc
 /usr/lib64/pkgconfig/uuid.pc
-/usr/share/man/man3/libblkid.3
-/usr/share/man/man3/uuid.3
-/usr/share/man/man3/uuid_clear.3
-/usr/share/man/man3/uuid_compare.3
-/usr/share/man/man3/uuid_copy.3
-/usr/share/man/man3/uuid_generate.3
-/usr/share/man/man3/uuid_generate_random.3
-/usr/share/man/man3/uuid_generate_time.3
-/usr/share/man/man3/uuid_generate_time_safe.3
-/usr/share/man/man3/uuid_is_null.3
-/usr/share/man/man3/uuid_parse.3
-/usr/share/man/man3/uuid_time.3
-/usr/share/man/man3/uuid_unparse.3
 
 %files dev32
 %defattr(-,root,root,-)
@@ -516,7 +495,6 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 /usr/share/bash-completion/completions/dmesg
 /usr/share/bash-completion/completions/eject
 /usr/share/bash-completion/completions/fallocate
-/usr/share/bash-completion/completions/fdformat
 /usr/share/bash-completion/completions/fdisk
 /usr/share/bash-completion/completions/fincore
 /usr/share/bash-completion/completions/findfs
@@ -630,125 +608,6 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 /usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
 /usr/share/package-licenses/util-linux/e5c9f3867b9251dcd2d97a4d1dffaa38afe6625d
 /usr/share/package-licenses/util-linux/fca052e126f39e97d69d000644b7a462f215c125
-
-%files man
-%defattr(0644,root,root,0755)
-/usr/share/man/man1/cal.1
-/usr/share/man/man1/choom.1
-/usr/share/man/man1/chrt.1
-/usr/share/man/man1/col.1
-/usr/share/man/man1/colcrt.1
-/usr/share/man/man1/colrm.1
-/usr/share/man/man1/column.1
-/usr/share/man/man1/dmesg.1
-/usr/share/man/man1/eject.1
-/usr/share/man/man1/fallocate.1
-/usr/share/man/man1/fincore.1
-/usr/share/man/man1/flock.1
-/usr/share/man/man1/getopt.1
-/usr/share/man/man1/hardlink.1
-/usr/share/man/man1/hexdump.1
-/usr/share/man/man1/ionice.1
-/usr/share/man/man1/ipcmk.1
-/usr/share/man/man1/ipcrm.1
-/usr/share/man/man1/ipcs.1
-/usr/share/man/man1/irqtop.1
-/usr/share/man/man1/last.1
-/usr/share/man/man1/lastb.1
-/usr/share/man/man1/logger.1
-/usr/share/man/man1/login.1
-/usr/share/man/man1/look.1
-/usr/share/man/man1/lscpu.1
-/usr/share/man/man1/lsipc.1
-/usr/share/man/man1/lsirq.1
-/usr/share/man/man1/lslogins.1
-/usr/share/man/man1/lsmem.1
-/usr/share/man/man1/mcookie.1
-/usr/share/man/man1/mesg.1
-/usr/share/man/man1/more.1
-/usr/share/man/man1/mountpoint.1
-/usr/share/man/man1/namei.1
-/usr/share/man/man1/nsenter.1
-/usr/share/man/man1/prlimit.1
-/usr/share/man/man1/rename.1
-/usr/share/man/man1/renice.1
-/usr/share/man/man1/rev.1
-/usr/share/man/man1/runuser.1
-/usr/share/man/man1/script.1
-/usr/share/man/man1/scriptlive.1
-/usr/share/man/man1/scriptreplay.1
-/usr/share/man/man1/setpriv.1
-/usr/share/man/man1/setsid.1
-/usr/share/man/man1/setterm.1
-/usr/share/man/man1/su.1
-/usr/share/man/man1/taskset.1
-/usr/share/man/man1/ul.1
-/usr/share/man/man1/unshare.1
-/usr/share/man/man1/utmpdump.1
-/usr/share/man/man1/uuidgen.1
-/usr/share/man/man1/uuidparse.1
-/usr/share/man/man1/wall.1
-/usr/share/man/man1/whereis.1
-/usr/share/man/man5/adjtime_config.5
-/usr/share/man/man5/fstab.5
-/usr/share/man/man5/terminal-colors.d.5
-/usr/share/man/man8/addpart.8
-/usr/share/man/man8/agetty.8
-/usr/share/man/man8/blkdiscard.8
-/usr/share/man/man8/blkid.8
-/usr/share/man/man8/blkzone.8
-/usr/share/man/man8/blockdev.8
-/usr/share/man/man8/cfdisk.8
-/usr/share/man/man8/chcpu.8
-/usr/share/man/man8/chmem.8
-/usr/share/man/man8/ctrlaltdel.8
-/usr/share/man/man8/delpart.8
-/usr/share/man/man8/fdformat.8
-/usr/share/man/man8/fdisk.8
-/usr/share/man/man8/findfs.8
-/usr/share/man/man8/findmnt.8
-/usr/share/man/man8/fsck.8
-/usr/share/man/man8/fsck.cramfs.8
-/usr/share/man/man8/fsck.minix.8
-/usr/share/man/man8/fsfreeze.8
-/usr/share/man/man8/fstrim.8
-/usr/share/man/man8/hwclock.8
-/usr/share/man/man8/i386.8
-/usr/share/man/man8/isosize.8
-/usr/share/man/man8/ldattach.8
-/usr/share/man/man8/linux32.8
-/usr/share/man/man8/linux64.8
-/usr/share/man/man8/losetup.8
-/usr/share/man/man8/lsblk.8
-/usr/share/man/man8/lslocks.8
-/usr/share/man/man8/lsns.8
-/usr/share/man/man8/mkfs.8
-/usr/share/man/man8/mkfs.bfs.8
-/usr/share/man/man8/mkfs.cramfs.8
-/usr/share/man/man8/mkfs.minix.8
-/usr/share/man/man8/mkswap.8
-/usr/share/man/man8/mount.8
-/usr/share/man/man8/partx.8
-/usr/share/man/man8/pivot_root.8
-/usr/share/man/man8/raw.8
-/usr/share/man/man8/readprofile.8
-/usr/share/man/man8/resizepart.8
-/usr/share/man/man8/rfkill.8
-/usr/share/man/man8/rtcwake.8
-/usr/share/man/man8/setarch.8
-/usr/share/man/man8/sfdisk.8
-/usr/share/man/man8/sulogin.8
-/usr/share/man/man8/swaplabel.8
-/usr/share/man/man8/swapoff.8
-/usr/share/man/man8/swapon.8
-/usr/share/man/man8/switch_root.8
-/usr/share/man/man8/umount.8
-/usr/share/man/man8/uname26.8
-/usr/share/man/man8/uuidd.8
-/usr/share/man/man8/wdctl.8
-/usr/share/man/man8/wipefs.8
-/usr/share/man/man8/x86_64.8
-/usr/share/man/man8/zramctl.8
 
 %files services
 %defattr(-,root,root,-)
