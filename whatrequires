@@ -3,12 +3,14 @@ Linux-PAM
 NetworkManager-l2tp
 OpenSP
 R
+R-gert
 Solaar
 asunder
 autossh
 calc
 cockpit
 compat-gcc-10
+debugedit
 dstat
 eid-mw
 elfutils
@@ -35,7 +37,6 @@ man-db
 man-pages
 nethogs
 nodejs
-not-ffmpeg
 numactl
 ocaml
 ocamlbuild
@@ -47,11 +48,8 @@ perl-Gtk3-WebKit
 perl-IO-CaptureOutput
 perl-List-SomeUtils
 perl-Test-NeedsDisplay
-php-dbase
 php-raphf
 pidgin-sipe
-poppler
-pycairo
 quilt
 rsyslog
 shadow
