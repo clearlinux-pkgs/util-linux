@@ -2,8 +2,6 @@ Configure miss: asciidoctor
 Configure miss: asciidoctor
 Configure miss: asm/io.h
 Configure miss: asm/io.h
-Configure miss: close_range
-Configure miss: close_range
 Configure miss: fpurge
 Configure miss: fpurge
 Configure miss: g++ option to enable C++11 features
@@ -39,8 +37,6 @@ Configure miss: strnchr
 Configure miss: strnchr
 Configure miss: sys/ioccom.h
 Configure miss: sys/ioccom.h
-Configure miss: timer_create
-Configure miss: timer_create
 Configure miss: union semun
 Configure miss: union semun
 Configure miss: whether compiler handles -Wembedded-directive
