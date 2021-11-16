@@ -25,11 +25,9 @@ gzip
 hyperscan
 ibus-skk
 lcms2
-libarchive-c
 libkcapi
 libsamplerate
 libskk
-libssh2
 libxslt
 linux-oracle
 linux-tools
@@ -38,7 +36,7 @@ man-pages
 nethogs
 nodejs
 numactl
-ocaml
+nvme-cli
 ocamlbuild
 opa-fm
 openvswitch

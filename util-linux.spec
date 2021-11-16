@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : util-linux
 Version  : 2.37.2
-Release  : 167
+Release  : 168
 URL      : https://www.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.2.tar.xz
 Source0  : https://www.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.2.tar.xz
 Summary  : mount library
@@ -169,6 +169,24 @@ Group: Default
 man components for the util-linux package.
 
 
+%package python
+Summary: python components for the util-linux package.
+Group: Default
+Requires: util-linux-python3 = %{version}-%{release}
+
+%description python
+python components for the util-linux package.
+
+
+%package python3
+Summary: python3 components for the util-linux package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the util-linux package.
+
+
 %package services
 Summary: services components for the util-linux package.
 Group: Systemd services
@@ -218,7 +236,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1629131365
+export SOURCE_DATE_EPOCH=1637097061
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -239,7 +257,7 @@ export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-
 PYTHON=/usr/bin/python3
 make  %{?_smp_mflags}
 pushd ../build32/
-export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
+export PKG_CONFIG_PATH="/usr/lib32/pkgconfig:/usr/share/pkgconfig"
 export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
 export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
@@ -272,7 +290,7 @@ cd ../build32;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1629131365
+export SOURCE_DATE_EPOCH=1637097061
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/util-linux
 cp %{_builddir}/util-linux-2.37.2/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c
@@ -294,19 +312,25 @@ pushd %{buildroot}/usr/lib32/pkgconfig
 for i in *.pc ; do ln -s $i 32$i ; done
 popd
 fi
+if [ -d %{buildroot}/usr/share/pkgconfig ]
+then
+pushd %{buildroot}/usr/share/pkgconfig
+for i in *.pc ; do ln -s $i 32$i ; done
+popd
+fi
 popd
 %make_install
 %find_lang util-linux
 ## Remove excluded files
-rm -f %{buildroot}/usr/share/getopt/getopt-parse.tcsh
-rm -f %{buildroot}/usr/share/doc/util-linux/getopt/getopt-parse.tcsh
-rm -f %{buildroot}/usr/share/bash-completion/completions/fsck.minix
-rm -f %{buildroot}/usr/share/bash-completion/completions/rfkill
-rm -f %{buildroot}/usr/bin/mkfs.bfs
-rm -f %{buildroot}/usr/bin/linux32
-rm -f %{buildroot}/usr/bin/fdformat
-rm -f %{buildroot}/usr/bin/fsck.minix
-rm -f %{buildroot}/usr/bin/mkfs.minix
+rm -f %{buildroot}*/usr/share/getopt/getopt-parse.tcsh
+rm -f %{buildroot}*/usr/share/doc/util-linux/getopt/getopt-parse.tcsh
+rm -f %{buildroot}*/usr/share/bash-completion/completions/fsck.minix
+rm -f %{buildroot}*/usr/share/bash-completion/completions/rfkill
+rm -f %{buildroot}*/usr/bin/mkfs.bfs
+rm -f %{buildroot}*/usr/bin/linux32
+rm -f %{buildroot}*/usr/bin/fdformat
+rm -f %{buildroot}*/usr/bin/fsck.minix
+rm -f %{buildroot}*/usr/bin/mkfs.minix
 ## install_append content
 mkdir %{buildroot}/usr/lib/systemd/system/sockets.target.wants
 ln -s ../uuidd.socket %{buildroot}/usr/lib/systemd/system/sockets.target.wants/uuidd.socket
@@ -496,9 +520,6 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 %files extras
 %defattr(-,root,root,-)
 /usr/bin/mkfs.cramfs
-/usr/lib/python3.9/site-packages/libmount/__init__.py
-/usr/lib/python3.9/site-packages/libmount/__pycache__/__init__.cpython-39.pyc
-/usr/lib/python3.9/site-packages/libmount/pylibmount.so
 /usr/share/bash-completion/completions/addpart
 /usr/share/bash-completion/completions/blkdiscard
 /usr/share/bash-completion/completions/blkid
@@ -745,6 +766,13 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 /usr/share/man/man8/wdctl.8
 /usr/share/man/man8/wipefs.8
 /usr/share/man/man8/zramctl.8
+
+%files python
+%defattr(-,root,root,-)
+
+%files python3
+%defattr(-,root,root,-)
+/usr/lib/python3*/*
 
 %files services
 %defattr(-,root,root,-)
