@@ -8,7 +8,7 @@ Subject: [PATCH] Speed up agetty waits.
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/term-utils/agetty.c b/term-utils/agetty.c
-index 191fa29..b7a8e89 100644
+index 3b3d510..68e6f31 100644
 --- a/term-utils/agetty.c
 +++ b/term-utils/agetty.c
 @@ -24,6 +24,7 @@
@@ -19,7 +19,7 @@ index 191fa29..b7a8e89 100644
  #include <ctype.h>
  #include <utmpx.h>
  #include <getopt.h>
-@@ -1450,7 +1451,7 @@ static void auto_baud(struct termios *tp)
+@@ -1454,7 +1455,7 @@ static void auto_baud(struct termios *tp)
  	 * Wait for a while, then read everything the modem has said so far and
  	 * try to extract the speed of the dial-in call.
  	 */
@@ -28,7 +28,7 @@ index 191fa29..b7a8e89 100644
  	if ((nread = read(STDIN_FILENO, buf, sizeof(buf) - 1)) > 0) {
  		buf[nread] = '\0';
  		for (bp = buf; bp < buf + nread; bp++)
-@@ -2108,6 +2109,7 @@ again:
+@@ -2112,6 +2113,7 @@ again:
  		/* Always show login prompt. */
  		write_all(STDOUT_FILENO, LOGIN, sizeof(LOGIN) - 1);
  	}
@@ -36,7 +36,7 @@ index 191fa29..b7a8e89 100644
  }
  
  /* Select next baud rate. */
-@@ -2153,7 +2155,7 @@ static char *get_logname(struct issue *ie, struct options *op, struct termios *t
+@@ -2157,7 +2159,7 @@ static char *get_logname(struct issue *ie, struct options *op, struct termios *t
  	 * the baud rate).
  	 */
  	if ((op->flags & F_VCONSOLE) == 0)

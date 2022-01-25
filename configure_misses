@@ -16,6 +16,8 @@ Configure miss: linux/compiler.h
 Configure miss: linux/compiler.h
 Configure miss: linux/fs.h
 Configure miss: linux/fs.h
+Configure miss: linux/raw.h
+Configure miss: linux/raw.h
 Configure miss: llseek
 Configure miss: llseek
 Configure miss: ncursesw/ncurses.h
