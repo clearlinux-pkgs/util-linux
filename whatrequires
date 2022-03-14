@@ -5,7 +5,6 @@ OpenSP
 R
 R-gert
 Solaar
-asunder
 autossh
 calc
 cockpit
@@ -33,7 +32,6 @@ linux-oracle
 linux-tools
 man-db
 man-pages
-nethogs
 nodejs
 numactl
 nvme-cli
