@@ -10,6 +10,7 @@ Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0
 Configure miss: glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0
+Configure miss: i686-generic-linux-gnu-file
 Configure miss: libuser >= 0.58
 Configure miss: libuser >= 0.58
 Configure miss: linux/compiler.h
@@ -47,4 +48,5 @@ Configure miss: whether compiler handles -Wextra-semi
 Configure miss: whether compiler handles -Wextra-semi
 Configure miss: whether compiler handles -Wformat-security
 Configure miss: whether compiler handles -Wformat-security
+Configure miss: x86_64-generic-linux-gnu-file
 Configure miss: x86_64-generic-linux-gnu-ncursesw6-config
