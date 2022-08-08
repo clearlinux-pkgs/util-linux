@@ -23,10 +23,6 @@ Configure miss: llseek
 Configure miss: llseek
 Configure miss: ncursesw/ncurses.h
 Configure miss: ncursesw/term.h
-Configure miss: pidfd_open
-Configure miss: pidfd_open
-Configure miss: pidfd_send_signal
-Configure miss: pidfd_send_signal
 Configure miss: readline in -lreadline
 Configure miss: rtas_get_sysparm in -lrtas
 Configure miss: rtas_get_sysparm in -lrtas

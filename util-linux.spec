@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : util-linux
-Version  : 2.38
-Release  : 172
-URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.tar.xz
-Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.tar.xz
+Version  : 2.38.1
+Release  : 173
+URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz
+Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz
 Summary  : Miscellaneous system utilities for Linux
 Group    : Development/Tools
 License  : BSD-3-Clause BSD-4-Clause-UC GPL-2.0 GPL-3.0 ISC LGPL-2.1
@@ -223,13 +223,13 @@ staticdev32 components for the util-linux package.
 
 
 %prep
-%setup -q -n util-linux-2.38
-cd %{_builddir}/util-linux-2.38
+%setup -q -n util-linux-2.38.1
+cd %{_builddir}/util-linux-2.38.1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 pushd ..
-cp -a util-linux-2.38 build32
+cp -a util-linux-2.38.1 build32
 popd
 
 %build
@@ -237,7 +237,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1648486701
+export SOURCE_DATE_EPOCH=1659978501
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -291,20 +291,20 @@ cd ../build32;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1648486701
+export SOURCE_DATE_EPOCH=1659978501
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/util-linux
-cp %{_builddir}/util-linux-2.38/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/util-linux-2.38/Documentation/licenses/COPYING.BSD-3-Clause %{buildroot}/usr/share/package-licenses/util-linux/e5c9f3867b9251dcd2d97a4d1dffaa38afe6625d
-cp %{_builddir}/util-linux-2.38/Documentation/licenses/COPYING.BSD-4-Clause-UC %{buildroot}/usr/share/package-licenses/util-linux/8afe522e7c956a6c19914cd5ffea17a0aa2e4bc7
-cp %{_builddir}/util-linux-2.38/Documentation/licenses/COPYING.GPL-2.0-or-later %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/util-linux-2.38/Documentation/licenses/COPYING.GPL-3.0-or-later %{buildroot}/usr/share/package-licenses/util-linux/31a3d460bb3c7d98845187c716a30db81c44b615
-cp %{_builddir}/util-linux-2.38/Documentation/licenses/COPYING.ISC %{buildroot}/usr/share/package-licenses/util-linux/fca052e126f39e97d69d000644b7a462f215c125
-cp %{_builddir}/util-linux-2.38/Documentation/licenses/COPYING.LGPL-2.1-or-later %{buildroot}/usr/share/package-licenses/util-linux/01a6b4bf79aca9b556822601186afab86e8c4fbf
-cp %{_builddir}/util-linux-2.38/libblkid/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
-cp %{_builddir}/util-linux-2.38/libfdisk/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
-cp %{_builddir}/util-linux-2.38/libmount/COPYING %{buildroot}/usr/share/package-licenses/util-linux/66319e97eda8747087e9c5292f31c8bc5153c3c8
-cp %{_builddir}/util-linux-2.38/libsmartcols/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
+cp %{_builddir}/util-linux-%{version}/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/util-linux-%{version}/Documentation/licenses/COPYING.BSD-3-Clause %{buildroot}/usr/share/package-licenses/util-linux/e5c9f3867b9251dcd2d97a4d1dffaa38afe6625d
+cp %{_builddir}/util-linux-%{version}/Documentation/licenses/COPYING.BSD-4-Clause-UC %{buildroot}/usr/share/package-licenses/util-linux/8afe522e7c956a6c19914cd5ffea17a0aa2e4bc7
+cp %{_builddir}/util-linux-%{version}/Documentation/licenses/COPYING.GPL-2.0-or-later %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/util-linux-%{version}/Documentation/licenses/COPYING.GPL-3.0-or-later %{buildroot}/usr/share/package-licenses/util-linux/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/util-linux-%{version}/Documentation/licenses/COPYING.ISC %{buildroot}/usr/share/package-licenses/util-linux/fca052e126f39e97d69d000644b7a462f215c125
+cp %{_builddir}/util-linux-%{version}/Documentation/licenses/COPYING.LGPL-2.1-or-later %{buildroot}/usr/share/package-licenses/util-linux/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/util-linux-%{version}/libblkid/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
+cp %{_builddir}/util-linux-%{version}/libfdisk/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
+cp %{_builddir}/util-linux-%{version}/libmount/COPYING %{buildroot}/usr/share/package-licenses/util-linux/66319e97eda8747087e9c5292f31c8bc5153c3c8
+cp %{_builddir}/util-linux-%{version}/libsmartcols/COPYING %{buildroot}/usr/share/package-licenses/util-linux/93e45afdb0d7c3fdd6dfcc951b8a3421660f2811
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
