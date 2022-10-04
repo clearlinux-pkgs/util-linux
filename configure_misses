@@ -15,8 +15,6 @@ Configure miss: libuser >= 0.58
 Configure miss: libuser >= 0.58
 Configure miss: linux/compiler.h
 Configure miss: linux/compiler.h
-Configure miss: linux/fs.h
-Configure miss: linux/fs.h
 Configure miss: linux/raw.h
 Configure miss: linux/raw.h
 Configure miss: llseek

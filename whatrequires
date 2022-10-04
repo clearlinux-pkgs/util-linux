@@ -33,7 +33,6 @@ man-pages
 nodejs
 numactl
 nvme-cli
-opa-fm
 openvswitch
 ostree
 perl-Data-Compare
