@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : util-linux
 Version  : 2.38.1
-Release  : 174
+Release  : 175
 URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz
 Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz
 Summary  : Miscellaneous system utilities for Linux
