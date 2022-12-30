@@ -3,7 +3,6 @@ Linux-PAM
 OpenSP
 R
 R-gert
-Solaar
 autossh
 calc
 cockpit
@@ -38,7 +37,6 @@ ostree
 perl-Data-Compare
 perl-Gtk3-WebKit
 perl-IO-CaptureOutput
-perl-List-SomeUtils
 perl-Test-NeedsDisplay
 php-raphf
 pidgin-sipe
@@ -46,6 +44,7 @@ quilt
 rsyslog
 shadow
 shim
+testdisk
 vifm
 xdg-utils
 xmlto

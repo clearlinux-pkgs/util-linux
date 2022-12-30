@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : util-linux
 Version  : 2.38.1
-Release  : 175
+Release  : 176
 URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz
 Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz
 Summary  : Miscellaneous system utilities for Linux
@@ -47,6 +47,9 @@ BuildRequires : readline-dev
 BuildRequires : systemd-dev32
 BuildRequires : zlib-dev
 BuildRequires : zlib-dev32
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 Patch1: 0001-Speed-up-agetty-waits.patch
 Patch2: 0002-Recommend-1M-topology-size-if-none-set.patch
 Patch3: 0003-Trim-all-filesystems-not-just-fstab-ones.patch
@@ -237,15 +240,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664898259
+export SOURCE_DATE_EPOCH=1672359715
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=auto -fno-semantic-interposition "
-export FCFLAGS="$FFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=auto -fno-semantic-interposition "
-export FFLAGS="$FFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=auto -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=auto -fno-semantic-interposition "
+export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -ffunction-sections -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -Os -fdata-sections -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -ffunction-sections -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -Os -fdata-sections -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -ffunction-sections -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -ffunction-sections -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
 %reconfigure  --disable-use-tty-group \
 --disable-makeinstall-chown \
 --disable-makeinstall-setuid \
@@ -291,7 +294,7 @@ cd ../build32;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1664898259
+export SOURCE_DATE_EPOCH=1672359715
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/util-linux
 cp %{_builddir}/util-linux-%{version}/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c || :
