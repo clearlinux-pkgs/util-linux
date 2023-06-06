@@ -1,5 +1,5 @@
 PKG_NAME := util-linux
-URL = https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz
+URL = https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common
