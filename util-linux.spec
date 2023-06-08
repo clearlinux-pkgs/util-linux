@@ -6,20 +6,18 @@
 %define keepstatic 1
 Name     : util-linux
 Version  : 2.39
-Release  : 177
+Release  : 178
 URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.tar.xz
 Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.tar.xz
 Summary  : Miscellaneous system utilities for Linux
 Group    : Development/Tools
 License  : BSD-3-Clause BSD-4-Clause-UC GPL-2.0 GPL-3.0 ISC LGPL-2.1
-Requires: util-linux-autostart = %{version}-%{release}
 Requires: util-linux-bin = %{version}-%{release}
 Requires: util-linux-data = %{version}-%{release}
 Requires: util-linux-lib = %{version}-%{release}
 Requires: util-linux-license = %{version}-%{release}
 Requires: util-linux-locales = %{version}-%{release}
 Requires: util-linux-man = %{version}-%{release}
-Requires: util-linux-services = %{version}-%{release}
 Requires: util-linux-setuid = %{version}-%{release}
 BuildRequires : Linux-PAM-dev
 BuildRequires : Linux-PAM-dev32
@@ -59,21 +57,12 @@ util-linux
 util-linux is a random collection of Linux utilities
 Note: for the years 2006-2010 this project was named "util-linux-ng".
 
-%package autostart
-Summary: autostart components for the util-linux package.
-Group: Default
-
-%description autostart
-autostart components for the util-linux package.
-
-
 %package bin
 Summary: bin components for the util-linux package.
 Group: Binaries
 Requires: util-linux-data = %{version}-%{release}
 Requires: util-linux-setuid = %{version}-%{release}
 Requires: util-linux-license = %{version}-%{release}
-Requires: util-linux-services = %{version}-%{release}
 
 %description bin
 bin components for the util-linux package.
@@ -127,6 +116,14 @@ Group: Default
 
 %description extras
 extras components for the util-linux package.
+
+
+%package extras-uuid-services
+Summary: extras-uuid-services components for the util-linux package.
+Group: Default
+
+%description extras-uuid-services
+extras-uuid-services components for the util-linux package.
 
 
 %package lib
@@ -191,15 +188,6 @@ Requires: python3-core
 python3 components for the util-linux package.
 
 
-%package services
-Summary: services components for the util-linux package.
-Group: Systemd services
-Requires: systemd
-
-%description services
-services components for the util-linux package.
-
-
 %package setuid
 Summary: setuid components for the util-linux package.
 Group: Default
@@ -235,13 +223,16 @@ cd %{_builddir}/util-linux-2.39
 pushd ..
 cp -a util-linux-2.39 build32
 popd
+pushd ..
+cp -a util-linux-2.39 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1686076833
+export SOURCE_DATE_EPOCH=1686234723
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -284,6 +275,25 @@ PYTHON=/usr/bin/python3 --without-ncurses \
 --disable-hardlink --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make  %{?_smp_mflags}
 popd
+unset PKG_CONFIG_PATH
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+%reconfigure  --disable-use-tty-group \
+--disable-makeinstall-chown \
+--disable-makeinstall-setuid \
+--disable-kill \
+--disable-chfn-chsh \
+--disable-nologin \
+--disable-plymouth_support \
+--without-econf \
+--without-libmagic \
+PYTHON=/usr/bin/python3
+make  %{?_smp_mflags}
+popd
 
 %check
 export LANG=C.UTF-8
@@ -293,9 +303,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 cd ../build32;
 make %{?_smp_mflags} check || : || :
+cd ../buildavx2;
+make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1686076833
+export SOURCE_DATE_EPOCH=1686234723
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/util-linux
 cp %{_builddir}/util-linux-%{version}/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c || :
@@ -324,6 +336,9 @@ for i in *.pc ; do ln -s $i 32$i ; done
 popd
 fi
 popd
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
 %find_lang util-linux
 ## Remove excluded files
@@ -337,22 +352,124 @@ rm -f %{buildroot}*/usr/bin/fdformat
 rm -f %{buildroot}*/usr/bin/fsck.minix
 rm -f %{buildroot}*/usr/bin/mkfs.minix
 ## install_append content
-mkdir %{buildroot}/usr/lib/systemd/system/sockets.target.wants
-ln -s ../uuidd.socket %{buildroot}/usr/lib/systemd/system/sockets.target.wants/uuidd.socket
-mkdir -p %{buildroot}/usr/lib/systemd/system/timers.target.wants/
-ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/fstrim.timer
+#mkdir %{buildroot}/usr/lib/systemd/system/sockets.target.wants
+#ln -s ../uuidd.socket %{buildroot}/usr/lib/systemd/system/sockets.target.wants/uuidd.socket
+#mkdir -p %{buildroot}/usr/lib/systemd/system/timers.target.wants/
+#ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/fstrim.timer
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name} --skip-path /usr/bin/su
 
 %files
 %defattr(-,root,root,-)
 
-%files autostart
-%defattr(-,root,root,-)
-/usr/lib/systemd/system/sockets.target.wants/uuidd.socket
-/usr/lib/systemd/system/timers.target.wants/fstrim.timer
-
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/addpart
+/V3/usr/bin/agetty
+/V3/usr/bin/blkdiscard
+/V3/usr/bin/blkid
+/V3/usr/bin/blkpr
+/V3/usr/bin/blkzone
+/V3/usr/bin/blockdev
+/V3/usr/bin/cal
+/V3/usr/bin/cfdisk
+/V3/usr/bin/chcpu
+/V3/usr/bin/chmem
+/V3/usr/bin/choom
+/V3/usr/bin/chrt
+/V3/usr/bin/col
+/V3/usr/bin/colcrt
+/V3/usr/bin/colrm
+/V3/usr/bin/column
+/V3/usr/bin/ctrlaltdel
+/V3/usr/bin/delpart
+/V3/usr/bin/dmesg
+/V3/usr/bin/eject
+/V3/usr/bin/fadvise
+/V3/usr/bin/fallocate
+/V3/usr/bin/fdisk
+/V3/usr/bin/fincore
+/V3/usr/bin/findfs
+/V3/usr/bin/findmnt
+/V3/usr/bin/flock
+/V3/usr/bin/fsck
+/V3/usr/bin/fsck.cramfs
+/V3/usr/bin/fsfreeze
+/V3/usr/bin/fstrim
+/V3/usr/bin/getopt
+/V3/usr/bin/hardlink
+/V3/usr/bin/hexdump
+/V3/usr/bin/hwclock
+/V3/usr/bin/ionice
+/V3/usr/bin/ipcmk
+/V3/usr/bin/ipcrm
+/V3/usr/bin/ipcs
+/V3/usr/bin/irqtop
+/V3/usr/bin/isosize
+/V3/usr/bin/last
+/V3/usr/bin/ldattach
+/V3/usr/bin/logger
+/V3/usr/bin/login
+/V3/usr/bin/look
+/V3/usr/bin/losetup
+/V3/usr/bin/lsblk
+/V3/usr/bin/lscpu
+/V3/usr/bin/lsfd
+/V3/usr/bin/lsipc
+/V3/usr/bin/lsirq
+/V3/usr/bin/lslocks
+/V3/usr/bin/lslogins
+/V3/usr/bin/lsmem
+/V3/usr/bin/lsns
+/V3/usr/bin/mcookie
+/V3/usr/bin/mesg
+/V3/usr/bin/mkfs
+/V3/usr/bin/mkswap
+/V3/usr/bin/more
+/V3/usr/bin/mount
+/V3/usr/bin/mountpoint
+/V3/usr/bin/namei
+/V3/usr/bin/nsenter
+/V3/usr/bin/partx
+/V3/usr/bin/pipesz
+/V3/usr/bin/pivot_root
+/V3/usr/bin/prlimit
+/V3/usr/bin/readprofile
+/V3/usr/bin/rename
+/V3/usr/bin/renice
+/V3/usr/bin/resizepart
+/V3/usr/bin/rev
+/V3/usr/bin/rfkill
+/V3/usr/bin/rtcwake
+/V3/usr/bin/runuser
+/V3/usr/bin/script
+/V3/usr/bin/scriptlive
+/V3/usr/bin/scriptreplay
+/V3/usr/bin/setarch
+/V3/usr/bin/setpriv
+/V3/usr/bin/setsid
+/V3/usr/bin/setterm
+/V3/usr/bin/sfdisk
+/V3/usr/bin/sulogin
+/V3/usr/bin/swaplabel
+/V3/usr/bin/swapoff
+/V3/usr/bin/swapon
+/V3/usr/bin/switch_root
+/V3/usr/bin/taskset
+/V3/usr/bin/uclampset
+/V3/usr/bin/ul
+/V3/usr/bin/umount
+/V3/usr/bin/unshare
+/V3/usr/bin/utmpdump
+/V3/usr/bin/uuidd
+/V3/usr/bin/uuidgen
+/V3/usr/bin/uuidparse
+/V3/usr/bin/waitpid
+/V3/usr/bin/wall
+/V3/usr/bin/wdctl
+/V3/usr/bin/whereis
+/V3/usr/bin/wipefs
+/V3/usr/bin/zramctl
 /usr/bin/addpart
 /usr/bin/agetty
 /usr/bin/blkdiscard
@@ -532,6 +649,7 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 
 %files extras
 %defattr(-,root,root,-)
+/V3/usr/bin/mkfs.cramfs
 /usr/bin/mkfs.cramfs
 /usr/share/bash-completion/completions/addpart
 /usr/share/bash-completion/completions/blkdiscard
@@ -628,8 +746,20 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 /usr/share/bash-completion/completions/wipefs
 /usr/share/bash-completion/completions/zramctl
 
+%files extras-uuid-services
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/fstrim.service
+/usr/lib/systemd/system/fstrim.timer
+/usr/lib/systemd/system/uuidd.service
+/usr/lib/systemd/system/uuidd.socket
+
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libblkid.so.1.1.0
+/V3/usr/lib64/libfdisk.so.1.1.0
+/V3/usr/lib64/libmount.so.1.1.0
+/V3/usr/lib64/libsmartcols.so.1.1.0
+/V3/usr/lib64/libuuid.so.1.3.0
 /usr/lib64/libblkid.so.1
 /usr/lib64/libblkid.so.1.1.0
 /usr/lib64/libfdisk.so.1
@@ -788,16 +918,8 @@ ln -sf ../fstrim.timer %{buildroot}/usr/lib/systemd/system/timers.target.wants/f
 
 %files python3
 %defattr(-,root,root,-)
+/V3/usr/lib/python3*/*
 /usr/lib/python3*/*
-
-%files services
-%defattr(-,root,root,-)
-%exclude /usr/lib/systemd/system/sockets.target.wants/uuidd.socket
-%exclude /usr/lib/systemd/system/timers.target.wants/fstrim.timer
-/usr/lib/systemd/system/fstrim.service
-/usr/lib/systemd/system/fstrim.timer
-/usr/lib/systemd/system/uuidd.service
-/usr/lib/systemd/system/uuidd.socket
 
 %files setuid
 %defattr(-,root,root,-)

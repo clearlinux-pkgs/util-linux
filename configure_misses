@@ -1,50 +1,76 @@
 Configure miss: asciidoctor
 Configure miss: asciidoctor
+Configure miss: asciidoctor
+Configure miss: asm/io.h
 Configure miss: asm/io.h
 Configure miss: asm/io.h
 Configure miss: fpurge
 Configure miss: fpurge
+Configure miss: fpurge
+Configure miss: g++ option to enable C++11 features
 Configure miss: g++ option to enable C++11 features
 Configure miss: g++ option to enable C++11 features
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0
 Configure miss: glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0
 Configure miss: glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0
 Configure miss: i686-generic-linux-gnu-file
 Configure miss: libuser >= 0.58
 Configure miss: libuser >= 0.58
+Configure miss: libuser >= 0.58
+Configure miss: linux/compiler.h
 Configure miss: linux/compiler.h
 Configure miss: linux/compiler.h
 Configure miss: linux/raw.h
 Configure miss: linux/raw.h
+Configure miss: linux/raw.h
+Configure miss: llseek
 Configure miss: llseek
 Configure miss: llseek
 Configure miss: ncursesw/ncurses.h
+Configure miss: ncursesw/ncurses.h
 Configure miss: ncursesw/term.h
+Configure miss: ncursesw/term.h
+Configure miss: po4a
 Configure miss: po4a
 Configure miss: po4a
 Configure miss: readline in -lreadline
 Configure miss: rtas_get_sysparm in -lrtas
 Configure miss: rtas_get_sysparm in -lrtas
+Configure miss: rtas_get_sysparm in -lrtas
+Configure miss: sched_setattr
 Configure miss: sched_setattr
 Configure miss: sched_setattr
 Configure miss: security/openpam.h
 Configure miss: security/openpam.h
+Configure miss: security/openpam.h
+Configure miss: setprogname
 Configure miss: setprogname
 Configure miss: setprogname
 Configure miss: strnchr
 Configure miss: strnchr
+Configure miss: strnchr
+Configure miss: sys/ioccom.h
 Configure miss: sys/ioccom.h
 Configure miss: sys/ioccom.h
 Configure miss: union semun
 Configure miss: union semun
+Configure miss: union semun
+Configure miss: whether PR_REP_CAPACITY is declared
 Configure miss: whether PR_REP_CAPACITY is declared
 Configure miss: whether PR_REP_CAPACITY is declared
 Configure miss: whether compiler handles -Wembedded-directive
 Configure miss: whether compiler handles -Wembedded-directive
+Configure miss: whether compiler handles -Wembedded-directive
 Configure miss: whether compiler handles -Wextra-semi
 Configure miss: whether compiler handles -Wextra-semi
+Configure miss: whether compiler handles -Wextra-semi
+Configure miss: whether compiler handles -Wformat-security
 Configure miss: whether compiler handles -Wformat-security
 Configure miss: whether compiler handles -Wformat-security
 Configure miss: x86_64-generic-linux-gnu-file
+Configure miss: x86_64-generic-linux-gnu-file
+Configure miss: x86_64-generic-linux-gnu-ncursesw6-config
 Configure miss: x86_64-generic-linux-gnu-ncursesw6-config
