@@ -1,5 +1,4 @@
 # This file contains recursive sources that require this package
-Linux-PAM
 OpenSP
 R
 R-gert
@@ -31,7 +30,6 @@ man-db
 man-pages
 nodejs
 numactl
-nvme-cli
 openvswitch
 ostree
 perl-Gtk3-WebKit

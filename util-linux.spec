@@ -5,10 +5,10 @@
 #
 %define keepstatic 1
 Name     : util-linux
-Version  : 2.39
-Release  : 179
-URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.tar.xz
-Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.tar.xz
+Version  : 2.39.1
+Release  : 180
+URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.1.tar.xz
+Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.1.tar.xz
 Summary  : Miscellaneous system utilities for Linux
 Group    : Development/Tools
 License  : BSD-3-Clause BSD-4-Clause-UC GPL-2.0 GPL-3.0 ISC LGPL-2.1
@@ -51,7 +51,6 @@ BuildRequires : zlib-dev32
 Patch1: 0001-Speed-up-agetty-waits.patch
 Patch2: 0002-Recommend-1M-topology-size-if-none-set.patch
 Patch3: 0003-Trim-all-filesystems-not-just-fstab-ones.patch
-Patch4: backport-ntfs.patch
 
 %description
 util-linux
@@ -216,17 +215,16 @@ staticdev32 components for the util-linux package.
 
 
 %prep
-%setup -q -n util-linux-2.39
-cd %{_builddir}/util-linux-2.39
+%setup -q -n util-linux-2.39.1
+cd %{_builddir}/util-linux-2.39.1
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
-%patch -P 4 -p1
 pushd ..
-cp -a util-linux-2.39 build32
+cp -a util-linux-2.39.1 build32
 popd
 pushd ..
-cp -a util-linux-2.39 buildavx2
+cp -a util-linux-2.39.1 buildavx2
 popd
 
 %build
@@ -234,7 +232,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1686581248
+export SOURCE_DATE_EPOCH=1689350290
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -309,7 +307,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1686581248
+export SOURCE_DATE_EPOCH=1689350290
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/util-linux
 cp %{_builddir}/util-linux-%{version}/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c || :
