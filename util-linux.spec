@@ -6,7 +6,7 @@
 %define keepstatic 1
 Name     : util-linux
 Version  : 2.39.1
-Release  : 180
+Release  : 181
 URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.1.tar.xz
 Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.1.tar.xz
 Summary  : Miscellaneous system utilities for Linux
@@ -232,7 +232,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689350290
+export SOURCE_DATE_EPOCH=1689751638
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -307,7 +307,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1689350290
+export SOURCE_DATE_EPOCH=1689751638
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/util-linux
 cp %{_builddir}/util-linux-%{version}/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c || :
