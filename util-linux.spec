@@ -5,10 +5,10 @@
 #
 %define keepstatic 1
 Name     : util-linux
-Version  : 2.39.1
-Release  : 181
-URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.1.tar.xz
-Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.1.tar.xz
+Version  : 2.39.2
+Release  : 182
+URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.2.tar.xz
+Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.39/util-linux-2.39.2.tar.xz
 Summary  : Miscellaneous system utilities for Linux
 Group    : Development/Tools
 License  : BSD-3-Clause BSD-4-Clause-UC GPL-2.0 GPL-3.0 ISC LGPL-2.1
@@ -215,16 +215,16 @@ staticdev32 components for the util-linux package.
 
 
 %prep
-%setup -q -n util-linux-2.39.1
-cd %{_builddir}/util-linux-2.39.1
+%setup -q -n util-linux-2.39.2
+cd %{_builddir}/util-linux-2.39.2
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
 pushd ..
-cp -a util-linux-2.39.1 build32
+cp -a util-linux-2.39.2 build32
 popd
 pushd ..
-cp -a util-linux-2.39.1 buildavx2
+cp -a util-linux-2.39.2 buildavx2
 popd
 
 %build
@@ -232,7 +232,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689751638
+export SOURCE_DATE_EPOCH=1692314742
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -307,7 +307,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1689751638
+export SOURCE_DATE_EPOCH=1692314742
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/util-linux
 cp %{_builddir}/util-linux-%{version}/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c || :
