@@ -4,12 +4,19 @@ Configure miss: asciidoctor
 Configure miss: asm/io.h
 Configure miss: asm/io.h
 Configure miss: asm/io.h
+Configure miss: cachestat
+Configure miss: cachestat
+Configure miss: cachestat
 Configure miss: fpurge
 Configure miss: fpurge
 Configure miss: fpurge
 Configure miss: g++ option to enable C++11 features
 Configure miss: g++ option to enable C++11 features
 Configure miss: g++ option to enable C++11 features
+Configure miss: gcc option for timestamps after 2038
+Configure miss: gcc option for timestamps after 2038
+Configure miss: gcc option to enable large file support
+Configure miss: gcc option to enable large file support
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gcc options needed to detect all undeclared functions
@@ -17,6 +24,15 @@ Configure miss: glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0
 Configure miss: glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0
 Configure miss: glib-2.0 >= 2.10.0 gobject-2.0  >= 2.10.0
 Configure miss: i686-generic-linux-gnu-file
+Configure miss: landlock_add_rule
+Configure miss: landlock_add_rule
+Configure miss: landlock_add_rule
+Configure miss: landlock_create_ruleset
+Configure miss: landlock_create_ruleset
+Configure miss: landlock_create_ruleset
+Configure miss: landlock_restrict_self
+Configure miss: landlock_restrict_self
+Configure miss: landlock_restrict_self
 Configure miss: libuser >= 0.58
 Configure miss: libuser >= 0.58
 Configure miss: libuser >= 0.58

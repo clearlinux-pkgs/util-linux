@@ -7,12 +7,12 @@ calc
 cockpit
 compat-gcc-10
 debugedit
-dstat
 eid-mw
 elfutils
 fakeroot
 gcc
 gcc11
+gcc14
 gcc9
 git
 git-gui
@@ -24,7 +24,6 @@ ibus-skk
 libkcapi
 libskk
 libxslt
-linux-oracle
 linux-tools
 man-db
 man-pages
