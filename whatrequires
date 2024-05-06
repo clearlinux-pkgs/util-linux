@@ -12,7 +12,6 @@ elfutils
 fakeroot
 gcc
 gcc11
-gcc14
 gcc9
 git
 git-gui
