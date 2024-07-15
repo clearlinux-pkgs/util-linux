@@ -979,6 +979,7 @@ libuuid.so.1:uuid_is_null
 libuuid.so.1:uuid_parse
 libuuid.so.1:uuid_parse_range
 libuuid.so.1:uuid_time
+libuuid.so.1:uuid_time64
 libuuid.so.1:uuid_type
 libuuid.so.1:uuid_unparse
 libuuid.so.1:uuid_unparse_lower
