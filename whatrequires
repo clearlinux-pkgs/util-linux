@@ -18,7 +18,6 @@ git-gui
 glibc
 gnutls
 gzip
-hyperscan
 ibus-skk
 libkcapi
 libskk

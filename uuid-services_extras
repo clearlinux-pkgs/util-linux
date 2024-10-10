@@ -1,4 +1,2 @@
-/usr/lib/systemd/system/fstrim.service
-/usr/lib/systemd/system/fstrim.timer
 /usr/lib/systemd/system/uuidd.service
 /usr/lib/systemd/system/uuidd.socket
