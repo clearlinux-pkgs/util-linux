@@ -8,7 +8,7 @@
 %define keepstatic 1
 Name     : util-linux
 Version  : 2.40.2
-Release  : 187
+Release  : 188
 URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.2.tar.gz
 Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.2.tar.gz
 Summary  : Miscellaneous system utilities for Linux
