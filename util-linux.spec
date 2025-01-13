@@ -7,10 +7,10 @@
 #
 %define keepstatic 1
 Name     : util-linux
-Version  : 2.40.3
-Release  : 189
-URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.3.tar.gz
-Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.3.tar.gz
+Version  : 2.40.4
+Release  : 190
+URL      : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.4.tar.gz
+Source0  : https://mirrors.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.4.tar.gz
 Summary  : Miscellaneous system utilities for Linux
 Group    : Development/Tools
 License  : BSD-3-Clause BSD-4-Clause-UC GPL-2.0 GPL-3.0 ISC LGPL-2.1 MIT
@@ -243,16 +243,16 @@ staticdev32 components for the util-linux package.
 
 
 %prep
-%setup -q -n util-linux-2.40.3
-cd %{_builddir}/util-linux-2.40.3
+%setup -q -n util-linux-2.40.4
+cd %{_builddir}/util-linux-2.40.4
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
 pushd ..
-cp -a util-linux-2.40.3 build32
+cp -a util-linux-2.40.4 build32
 popd
 pushd ..
-cp -a util-linux-2.40.3 buildavx2
+cp -a util-linux-2.40.4 buildavx2
 popd
 
 %build
@@ -260,7 +260,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1736442104
+export SOURCE_DATE_EPOCH=1736795252
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -357,7 +357,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1736442104
+export SOURCE_DATE_EPOCH=1736795252
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/util-linux
 cp %{_builddir}/util-linux-%{version}/COPYING %{buildroot}/usr/share/package-licenses/util-linux/4cc77b90af91e615a64ae04893fdffa7939db84c || :
