@@ -56,9 +56,6 @@ Configure miss: readline in -lreadline
 Configure miss: rtas_get_sysparm in -lrtas
 Configure miss: rtas_get_sysparm in -lrtas
 Configure miss: rtas_get_sysparm in -lrtas
-Configure miss: sched_setattr
-Configure miss: sched_setattr
-Configure miss: sched_setattr
 Configure miss: security/openpam.h
 Configure miss: security/openpam.h
 Configure miss: security/openpam.h

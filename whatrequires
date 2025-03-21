@@ -33,7 +33,6 @@ perl-Gtk3-WebKit
 perl-IO-CaptureOutput
 perl-Test-NeedsDisplay
 php-raphf
-pidgin-sipe
 quilt
 rsyslog
 shim
